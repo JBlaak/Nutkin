@@ -1,7 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './app';
+import './ui/misc/index.css';
+import {Squirrel} from './lib/react/squirrel';
+import {MyNavigator} from './navigator';
 
-ReactDOM.render(<App/>, document.getElementById('root'));
+const myNavigator = new MyNavigator();
 
+ReactDOM.render(<Squirrel navigator={myNavigator} />, document.getElementById('root'));
