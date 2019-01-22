@@ -1,5 +1,5 @@
-import {Scene} from '../../scene';
-import {Container} from '../../container';
+import {Scene} from '../scene';
+import {Container} from '../container';
 
 export enum SceneState {
     Started = 'Started',
@@ -7,17 +7,17 @@ export enum SceneState {
     Destroyed = 'Destroyed',
 }
 
-export interface MyContainer extends Container {}
+export interface TestContainer extends Container {}
 
-export class TestScene implements Scene<MyContainer> {
+export class TestScene implements Scene<TestContainer> {
     public states: SceneState[] = [];
-    public attachedContainer: MyContainer | null = null;
+    public attachedContainer: TestContainer | null = null;
 
-    public attach(v: MyContainer): void {
+    public attach(v: TestContainer): void {
         this.attachedContainer = v;
     }
 
-    public detach(v: MyContainer): void {
+    public detach(v: TestContainer): void {
         this.attachedContainer = null;
     }
 

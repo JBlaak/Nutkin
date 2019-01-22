@@ -4,10 +4,7 @@ import {MvvmContainer, MvvmScene} from '../../core/scenes/mvvm_scene';
 import {Scene} from '../../core/scene';
 import {Container} from '../../core/container';
 
-export function mvvmViewFactory(
-    scene: Scene<Container>,
-    view: FunctionComponent<any>,
-) {
+export function mvvmViewFactory(scene: Scene<Container>, view: FunctionComponent<any>) {
     return React.createElement(MvvmViewFactory, {
         view: view,
         attach: scene.attach.bind(scene),
@@ -15,7 +12,7 @@ export function mvvmViewFactory(
     });
 }
 
-export interface WithController<S > {
+export interface WithController<S> {
     controller: S;
 }
 
@@ -35,24 +32,20 @@ export class MvvmViewFactory<S> extends React.Component<OwnProps<S>, State<S>> i
     };
 
     public componentDidMount(): void {
-        console.log('componentDidMount attaching');
         this.props.attach(this);
     }
 
     public componentWillUnmount(): void {
-        console.log('componentWillUnmount detaching');
         this.props.detach(this);
     }
 
     public attachTo(scene: MvvmScene<S>): void {
-        console.log('attachTo', scene);
         this.setState({
             scene: scene,
         });
     }
 
     public detachFrom(scene: MvvmScene<S>): void {
-        console.log('detachFrom', scene);
         this.setState({
             scene: null,
         });

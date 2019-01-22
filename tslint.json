@@ -17,7 +17,7 @@
         "arrow-parens": false,
         "only-arrow-functions": false,
         "object-literal-shorthand": false,
-        "no-console": [true, "log"],
+        "no-console": false,
         "no-shadowed-variable": [
             true,
             {

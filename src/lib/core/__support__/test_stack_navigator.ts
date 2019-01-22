@@ -1,6 +1,6 @@
-import {StackNavigator} from '../stack_navigator';
-import {Scene} from '../../scene';
-import {Container} from '../../container';
+import {StackNavigator} from '../navigators/stack_navigator';
+import {Scene} from '../scene';
+import {Container} from '../container';
 
 export class TestStackNavigator extends StackNavigator {
     private _providedStack: Array<Scene<Container>>;

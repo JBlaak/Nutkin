@@ -6,16 +6,16 @@ import {ViewProvidingScene} from './view_providing_scene';
 import {SquirrelComponentClass} from './squirrel_component';
 import {Navigator} from '../core/navigator';
 import {mvvmViewFactory} from './factories/mvvm_view_factory';
+import {MvvmViewProvidingScene} from './mvvm_view_providing_scene';
 
 interface OwnProps {
     navigator: Navigator.Instance;
 }
 
-//TODO fix any
-type ViewFactory = {
+interface ViewFactory {
     view: any;
     instance: null | ((scene: Scene<Container>, view: any) => any);
-};
+}
 
 interface State {
     lastUpdate: number;
@@ -51,7 +51,7 @@ export class Squirrel extends React.Component<OwnProps, State> implements Naviga
         }
         if (this.isControlledViewProvidingScene(scene)) {
             return {
-                view: (scene as any).getMvvmView(),
+                view: scene.getMvvmView(),
                 instance: mvvmViewFactory,
             };
         }
@@ -69,11 +69,11 @@ export class Squirrel extends React.Component<OwnProps, State> implements Naviga
     }
 
     private isViewProvidingScene<C extends Container>(scene: Scene<C>): scene is ViewProvidingScene<C> {
-        return (scene as ViewProvidingScene<C>).getView !== undefined;
+        return 'getView' in scene;
     }
 
-    private isControlledViewProvidingScene<C extends Container>(scene: Scene<C>) {
-        return (scene as any).getMvvmView() !== undefined;
+    private isControlledViewProvidingScene<C extends Container>(scene: Scene<C>): scene is MvvmViewProvidingScene<C> {
+        return 'getMvvmView' in scene;
     }
 
     private viewForScene<C extends Container>(scene: Scene<C>): SquirrelComponentClass<C> {

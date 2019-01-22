@@ -1,6 +1,6 @@
-import {Navigator} from '../../navigator';
-import {Scene} from '../../scene';
-import {Container} from '../../container';
+import {Navigator} from '../navigator';
+import {Scene} from '../scene';
+import {Container} from '../container';
 
 export class TestNavigationEventsListener implements Navigator.Events {
     public isFinished = false;

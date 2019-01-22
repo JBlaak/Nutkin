@@ -1,6 +1,6 @@
-import {scenesAreEqual, SceneState, statesAreEqual, TestScene} from '../__support__/test_scene';
-import {TestStackNavigator} from '../__support__/test_stack_navigator';
-import {TestNavigationEventsListener} from '../__support__/test_navigation_events_listener';
+import {scenesAreEqual, SceneState, statesAreEqual, TestScene} from '../../__support__/test_scene';
+import {TestStackNavigator} from '../../__support__/test_stack_navigator';
+import {TestNavigationEventsListener} from '../../__support__/test_navigation_events_listener';
 import {Container} from '../../container';
 import {Scene} from '../../scene';
 
