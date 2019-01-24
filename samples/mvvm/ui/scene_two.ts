@@ -1,8 +1,8 @@
-import {MvvmScene} from '../lib/core/scenes/mvvm_scene';
+import {MvvmScene} from '../../../src/core/scenes/mvvm_scene';
 import {ComponentType} from 'react';
 import {ScreenTwo} from './screen_two';
-import {WithController} from '../lib/react/mvvm/mvvm_view_factory';
-import {MvvmViewProvidingScene} from '../lib/react/mvvm/mvvm_view_providing_scene';
+import {WithController} from '../../../src/react/mvvm/mvvm_view_factory';
+import {MvvmViewProvidingScene} from '../../../src/react/mvvm/mvvm_view_providing_scene';
 
 export class SceneTwo extends MvvmScene<SceneTwo> implements MvvmViewProvidingScene<SceneTwo> {
     public bar: string;

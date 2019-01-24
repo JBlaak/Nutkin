@@ -1,7 +1,7 @@
-import {Scene} from './lib/core/scene';
-import {Container} from './lib/core/container';
+import {Scene} from '../../src/core/scene';
+import {Container} from '../../src/core/container';
 import {SceneOne, SceneOneEvents} from './ui/scene_one';
-import {StackNavigator} from './lib/core/navigators/stack_navigator';
+import {StackNavigator} from '../../src/core/navigators/stack_navigator';
 import {SceneTwo, SceneTwoEvents} from './ui/scene_two';
 
 export class MyNavigator extends StackNavigator implements SceneOneEvents, SceneTwoEvents {

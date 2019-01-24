@@ -2,26 +2,10 @@
     "name": "squirrel",
     "version": "0.1.0",
     "private": true,
-    "dependencies": {
-        "@types/jest": "23.3.13",
-        "@types/node": "10.12.18",
-        "@types/react": "^16.7.20",
-        "@types/react-dom": "^16.0.11",
-        "jest-dom": "^3.0.0",
-        "react": "^16.8.0-alpha.1",
-        "react-dom": "^16.8.0-alpha.1",
-        "react-scripts": "2.1.3",
-        "react-testing-library": "^5.4.4",
-        "rxjs": "^6.3.3",
-        "tsmonad": "^0.8.0",
-        "typescript": "^3.2.4"
-    },
     "scripts": {
         "precommit": "lint-staged",
-        "start": "react-scripts start",
-        "build": "react-scripts build",
-        "test": "tslint & react-scripts test --verbose",
-        "eject": "react-scripts eject"
+        "test": "tslint & jest test --verbose --env=jsdom",
+        "test:watch": "tslint & jest test --verbose --env=jsdom --watch"
     },
     "lint-staged": {
         "*.{ts,tsx}": [
@@ -35,17 +19,24 @@
         ]
     },
     "devDependencies": {
+        "@types/jest": "23.3.13",
+        "@types/node": "10.12.18",
+        "@types/react": "^16.7.20",
+        "@types/react-dom": "^16.0.11",
         "husky": "^1.3.1",
+        "jest": "^23.6.0",
+        "jest-dom": "^3.0.0",
         "lint-staged": "^8.1.0",
         "prettier": "^1.15.3",
+        "react": "^16.8.0-alpha.1",
+        "react-dom": "^16.8.0-alpha.1",
+        "react-testing-library": "^5.4.4",
+        "rxjs": "^6.3.3",
+        "ts-jest": "^23.10.5",
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.17.0",
-        "tslint-eslint-rules": "^5.4.0"
-    },
-    "browserslist": [
-        ">0.2%",
-        "not dead",
-        "not ie <= 11",
-        "not op_mini all"
-    ]
+        "tslint-eslint-rules": "^5.4.0",
+        "tsmonad": "^0.8.0",
+        "typescript": "^3.2.4"
+    }
 }
