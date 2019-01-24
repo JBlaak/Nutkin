@@ -1,7 +1,7 @@
 import React from 'react';
 import './misc/app.css';
 import {SceneTwo} from './scene_two';
-import {WithController} from '../lib/react/factories/mvvm_view_factory';
+import {WithController} from '../lib/react/mvvm/mvvm_view_factory';
 
 export const ScreenTwo = ({controller}: WithController<SceneTwo>) => {
     return (

@@ -2,24 +2,26 @@ import * as React from 'react';
 import {Fragment} from 'react';
 import {Scene} from '../core/scene';
 import {Container} from '../core/container';
-import {ViewProvidingScene} from './view_providing_scene';
-import {SquirrelComponentClass} from './squirrel_component';
 import {Navigator} from '../core/navigator';
-import {mvvmViewFactory} from './factories/mvvm_view_factory';
-import {MvvmViewProvidingScene} from './mvvm_view_providing_scene';
+import {getViewFactoryForScene, ViewFactory} from './view_factory_factory';
 
 interface OwnProps {
     navigator: Navigator.Instance;
-}
-
-interface ViewFactory {
-    view: any;
-    instance: null | ((scene: Scene<Container>, view: any) => any);
+    onFinish?: () => void;
 }
 
 interface State {
+    /**
+     * Contains a timestamp for every update, used as a key to force a re-render
+     */
     lastUpdate: number;
+    /**
+     * The currently active scene
+     */
     scene: Scene<Container> | null;
+    /**
+     * The view factory to render the current scene
+     */
     factory: ViewFactory | null;
 }
 
@@ -30,72 +32,54 @@ export class Squirrel extends React.Component<OwnProps, State> implements Naviga
         factory: null,
     };
 
-    public finished(): void {
-        //TODO
-    }
-
+    /**
+     * When a new scene is received this is called
+     * @param scene
+     */
     public scene(scene: Scene<Container>): void {
         this.setState({
             lastUpdate: new Date().getTime(),
             scene: scene,
-            factory: this.getView(scene),
+            factory: getViewFactoryForScene(scene),
         });
     }
 
-    private getView(scene: Scene<Container>): ViewFactory {
-        if (this.isViewProvidingScene(scene)) {
-            return {
-                view: scene.getView(),
-                instance: null,
-            };
+    /**
+     * When navigator is finished allow the callback to propagate upwards through component tree
+     */
+    public finished(): void {
+        if (this.props.onFinish !== undefined) {
+            this.props.onFinish();
         }
-        if (this.isControlledViewProvidingScene(scene)) {
-            return {
-                view: scene.getMvvmView(),
-                instance: mvvmViewFactory,
-            };
-        }
-        return {view: this.viewForScene(scene), instance: null};
     }
 
+    /**
+     * When the Squirrel component mounts in the component tree register as listener on the navigator and
+     * make sure it is booted
+     */
     public componentDidMount(): void {
         this.props.navigator.addNavigatorEventsListener(this);
         this.props.navigator.onStart();
     }
 
+    /**
+     * When removing the squirrel component from view make sure we stop and destroy the navigator
+     */
     public componentWillUnmount(): void {
         this.props.navigator.onStop();
         this.props.navigator.onDestroy();
     }
 
-    private isViewProvidingScene<C extends Container>(scene: Scene<C>): scene is ViewProvidingScene<C> {
-        return 'getView' in scene;
-    }
-
-    private isControlledViewProvidingScene<C extends Container>(scene: Scene<C>): scene is MvvmViewProvidingScene<C> {
-        return 'getMvvmView' in scene;
-    }
-
-    private viewForScene<C extends Container>(scene: Scene<C>): SquirrelComponentClass<C> {
-        throw new Error('Only view providing scenes supported');
-    }
-
-    private factory() {
+    private renderContent() {
         if (this.state.scene === null || this.state.factory === null) {
-            //TODO
+            //TODO, maybe suspense?
             return null;
         }
-        if (this.state.factory.instance !== null) {
-            return this.state.factory.instance(this.state.scene, this.state.factory.view);
-        }
 
-        return React.createElement(this.state.factory.view, {
-            attach: this.state.scene.attach.bind(this.state.scene),
-            detach: this.state.scene.detach.bind(this.state.scene),
-        });
+        return this.state.factory.instance(this.state.scene, this.state.factory.view);
     }
 
     public render() {
-        return <Fragment key={this.state.lastUpdate}>{this.factory()}</Fragment>;
+        return <Fragment key={this.state.lastUpdate}>{this.renderContent()}</Fragment>;
     }
 }

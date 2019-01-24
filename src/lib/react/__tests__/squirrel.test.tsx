@@ -1,16 +1,21 @@
 import * as React from 'react';
+import {useState} from 'react';
 import {render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
 import {Squirrel} from '../squirrel';
-import {TestSingleSceneNavigator} from '../../core/__support__/test_single_scene_navigator';
+import {
+    NavigatorState,
+    navigatorStatesAreEqual,
+    TestSingleSceneNavigator,
+} from '../../core/__support__/test_single_scene_navigator';
 import {TestViewProvidingScene} from '../__support__/test_view_providing_scene';
 import {SceneState, statesAreEqual} from '../../core/__support__/test_scene';
 import {TestStackNavigator} from '../../core/__support__/test_stack_navigator';
 import {OtherTestComponent} from '../__support__/other_test_component';
 import {TestComponent} from '../__support__/test_component';
 import {TestMvvmScene} from '../__support__/test_mvvm_scene';
-import {WithController} from '../factories/mvvm_view_factory';
+import {WithController} from '../mvvm/mvvm_view_factory';
 
 describe('React Squirrel', () => {
     describe('Single render lifecycle with view providing scenes', () => {
@@ -48,6 +53,21 @@ describe('React Squirrel', () => {
 
             /* Then */
             expect(testScene.attachedContainer).not.toBeNull();
+        });
+
+        it('finishing of the navigator should trigger onFinish callback on Squirrel component', () => {
+            /* Given */
+            const testScene = new TestViewProvidingScene();
+            const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
+
+            /* When */
+            let finished = false;
+            const onFinish = () => (finished = true);
+            render(<Squirrel navigator={testSingleSceneNavigator} onFinish={onFinish} />);
+            testSingleSceneNavigator.finish();
+
+            /* Then */
+            expect(finished).toBe(true);
         });
     });
 
@@ -277,6 +297,57 @@ describe('React Squirrel', () => {
             expect(renderings[0]).toBe(1);
             expect(renderings[1]).toBe(2);
             expect(renderings[2]).toBe(1);
+        });
+    });
+
+    describe('<Squirrel/> lifecycle', () => {
+        it('should not crash when removed from component tree', () => {
+            /* Given */
+            const testScene = new TestViewProvidingScene();
+            const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
+
+            /* When */
+            let setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+            const MyComponent = () => {
+                const [isVisible, _setIsVisible]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(
+                    true,
+                );
+                setIsVisible = _setIsVisible;
+
+                return isVisible ? <Squirrel navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
+            };
+            const result = render(<MyComponent />);
+            setIsVisible!(false);
+
+            /* Then */
+            expect(result.getByText('Nope')).toBeInTheDocument();
+        });
+        it('should stop and destroy navigator when removed from component tree', () => {
+            /* Given */
+            const testScene = new TestViewProvidingScene();
+            const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
+
+            /* When */
+            let setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+            const MyComponent = () => {
+                const [isVisible, _setIsVisible]: [boolean, React.Dispatch<React.SetStateAction<boolean>>] = useState(
+                    true,
+                );
+                setIsVisible = _setIsVisible;
+
+                return isVisible ? <Squirrel navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
+            };
+            const result = render(<MyComponent />);
+            setIsVisible!(false);
+
+            /* Then */
+            expect(
+                navigatorStatesAreEqual(testSingleSceneNavigator.states, [
+                    NavigatorState.Started,
+                    NavigatorState.Stopped,
+                    NavigatorState.Destroyed,
+                ]),
+            ).toBe(true);
         });
     });
 });

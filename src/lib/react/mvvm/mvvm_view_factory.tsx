@@ -1,10 +1,10 @@
 import * as React from 'react';
-import {FunctionComponent} from 'react';
+import {ComponentType} from 'react';
 import {MvvmContainer, MvvmScene} from '../../core/scenes/mvvm_scene';
 import {Scene} from '../../core/scene';
 import {Container} from '../../core/container';
 
-export function mvvmViewFactory(scene: Scene<Container>, view: FunctionComponent<any>) {
+export function mvvmViewFactory(scene: Scene<Container>, view: ComponentType<any>) {
     return React.createElement(MvvmViewFactory, {
         view: view,
         attach: scene.attach.bind(scene),
@@ -17,7 +17,7 @@ export interface WithController<S> {
 }
 
 interface OwnProps<S> {
-    view: FunctionComponent<WithController<MvvmScene<S>>>;
+    view: ComponentType<WithController<MvvmScene<S>>>;
     attach: (c: MvvmContainer<MvvmScene<S>>) => void;
     detach: (c: MvvmContainer<MvvmScene<S>>) => void;
 }

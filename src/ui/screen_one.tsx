@@ -1,6 +1,6 @@
 import React from 'react';
 import './misc/app.css';
-import {WithController} from '../lib/react/factories/mvvm_view_factory';
+import {WithController} from '../lib/react/mvvm/mvvm_view_factory';
 import {SceneOne} from './scene_one';
 
 export const ScreenOne = ({controller}: WithController<SceneOne>) => {

@@ -1,8 +1,8 @@
 import {MvvmScene} from '../lib/core/scenes/mvvm_scene';
 import {ScreenOne} from './screen_one';
 import {ComponentType} from 'react';
-import {WithController} from '../lib/react/factories/mvvm_view_factory';
-import {MvvmViewProvidingScene} from '../lib/react/mvvm_view_providing_scene';
+import {WithController} from '../lib/react/mvvm/mvvm_view_factory';
+import {MvvmViewProvidingScene} from '../lib/react/mvvm/mvvm_view_providing_scene';
 
 export class SceneOne extends MvvmScene<SceneOne> implements MvvmViewProvidingScene<SceneOne> {
     public foo: string;
