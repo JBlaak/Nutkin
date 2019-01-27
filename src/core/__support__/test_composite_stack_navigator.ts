@@ -1,17 +1,16 @@
-import {SingleSceneNavigator} from '../navigators/single_scene_navigator';
-import {Scene} from '../scene';
-import {Container} from '../container';
+import {CompositeStackNavigator} from '../navigators/composite_stack_navigator';
+import {Navigator} from '../navigator';
 import {NavigatorState} from './navigator_state';
 
-export class TestSingleSceneNavigator extends SingleSceneNavigator {
+export class TestCompositeStackNavigator extends CompositeStackNavigator {
     public states: NavigatorState[] = [];
 
-    constructor(private scene: Scene<Container>) {
+    constructor(private _initialStack: Navigator.Instance[]) {
         super();
     }
 
-    public createScene(): Scene<Container> {
-        return this.scene;
+    public initialStack(): Navigator.Instance[] {
+        return this._initialStack;
     }
 
     public onStart(): void {
@@ -33,9 +32,6 @@ export class TestSingleSceneNavigator extends SingleSceneNavigator {
 export function navigatorStatesAreEqual(a: NavigatorState[], b: NavigatorState[]): boolean {
     if (a.length !== b.length) {
         return false;
-    }
-    if (a.length === 0) {
-        return true;
     }
 
     return !a.some((item, index) => b[index] !== item);
