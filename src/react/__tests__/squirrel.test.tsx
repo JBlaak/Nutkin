@@ -4,11 +4,7 @@ import {render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
 import {Squirrel} from '../squirrel';
-import {
-    NavigatorState,
-    navigatorStatesAreEqual,
-    TestSingleSceneNavigator,
-} from '../../core/__support__/test_single_scene_navigator';
+import {navigatorStatesAreEqual, TestSingleSceneNavigator} from '../../core/__support__/test_single_scene_navigator';
 import {TestViewProvidingScene} from '../__support__/test_view_providing_scene';
 import {SceneState, statesAreEqual} from '../../core/__support__/test_scene';
 import {TestStackNavigator} from '../../core/__support__/test_stack_navigator';
@@ -16,6 +12,7 @@ import {OtherTestComponent} from '../__support__/other_test_component';
 import {TestComponent} from '../__support__/test_component';
 import {TestMvvmScene} from '../__support__/test_mvvm_scene';
 import {WithController} from '../mvvm/mvvm_view_factory';
+import {NavigatorState} from '../../core/__support__/navigator_state';
 
 describe('React Squirrel', () => {
     describe('Single render lifecycle with view providing scenes', () => {
