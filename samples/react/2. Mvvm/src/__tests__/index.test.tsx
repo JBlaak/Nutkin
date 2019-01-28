@@ -6,7 +6,7 @@ import {MyNavigator} from '../navigator';
 import {fireEvent, render} from 'react-testing-library';
 import {MyScene} from '../scene';
 
-describe('Samples - react - 1. Basic', () => {
+describe('Samples - react - 2. Mvvm', () => {
     /* Just the scene itself, no React specific stuff here  */
     describe('Business', () => {
         describe('MyScene', () => {

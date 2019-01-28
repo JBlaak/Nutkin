@@ -1,7 +1,4 @@
 {
-    "name": "sample-react-basic",
-    "version": "1.0.0",
-    "license": "MIT",
     "scripts": {
         "start": "webpack --display minimal",
         "test": "jest test --verbose --env=jsdom"
