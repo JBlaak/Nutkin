@@ -1,0 +1,13 @@
+import * as React from 'react';
+import {WithController} from '../../../../../src/react/mvvm/mvvm_view_factory';
+import {SecondScene} from './second_scene';
+
+export class SecondScreen extends React.Component<WithController<SecondScene>> {
+    public render() {
+        return (
+            <div>
+                <a onClick={() => this.props.controller.onClick()}>Back</a>
+            </div>
+        );
+    }
+}
