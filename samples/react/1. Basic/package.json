@@ -1,0 +1,20 @@
+{
+    "name": "sample-react-basic",
+    "version": "1.0.0",
+    "license": "MIT",
+    "scripts": {
+        "start": "webpack --display minimal"
+    },
+    "dependencies": {
+        "@types/react": "^16.7.21",
+        "@types/react-dom": "^16.0.11",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0"
+    },
+    "devDependencies": {
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.2.4",
+        "webpack": "^4.29.0",
+        "webpack-cli": "^3.2.1"
+    }
+}
