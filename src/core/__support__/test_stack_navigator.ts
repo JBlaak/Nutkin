@@ -1,18 +1,17 @@
 import {StackNavigator} from '../navigators/stack_navigator';
 import {Scene} from '../scene';
-import {Container} from '../container';
 import {NavigatorState} from './navigator_state';
 
 export class TestStackNavigator extends StackNavigator {
     public states: NavigatorState[] = [];
-    private _providedStack: Array<Scene<Container>>;
+    private _providedStack: Scene[];
 
-    constructor(providedStack: Array<Scene<Container>>) {
+    constructor(providedStack: Scene[]) {
         super();
         this._providedStack = providedStack;
     }
 
-    public initialStack(): Array<Scene<Container>> {
+    public initialStack(): Scene[] {
         return this._providedStack;
     }
 

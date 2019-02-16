@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {Scene} from '../core/scene';
-import {Container} from '../core/container';
 import {Navigator} from '../core/navigator';
 import {getViewFactoryForScene, ViewFactory} from './view_factory_factory';
 
@@ -18,7 +17,7 @@ interface State {
     /**
      * The currently active scene
      */
-    scene: Scene<Container> | null;
+    scene: Scene | null;
     /**
      * The view factory to render the current scene
      */
@@ -36,7 +35,7 @@ export class Squirrel extends React.Component<OwnProps, State> implements Naviga
      * When a new scene is received this is called
      * @param scene
      */
-    public scene(scene: Scene<Container>): void {
+    public scene(scene: Scene): void {
         this.setState({
             lastUpdate: new Date().getTime(),
             scene: scene,

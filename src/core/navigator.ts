@@ -1,5 +1,4 @@
 import {Scene} from './scene';
-import {Container} from './container';
 
 export namespace Navigator {
     export interface Instance {
@@ -67,7 +66,7 @@ export namespace Navigator {
          *
          * @param scene the newly active [Scene].
          */
-        scene(scene: Scene<Container>): void;
+        scene(scene: Scene): void;
 
         /**
          * Called when the Navigator has finished.

@@ -1,24 +1,8 @@
-import {Container} from './container';
-
-export interface Scene<V extends Container> {
+export interface Scene {
     /**
      * Called when this Scene is started.
      */
     onStart(): void;
-
-    /**
-     * Attaches given [V] to this Scene.
-     *
-     * @param v The user interface that is being attached.
-     */
-    attach(v: V): void;
-
-    /**
-     * Detaches any views from this scene.
-     *
-     * Will always be preceded by a call to [attach].
-     */
-    detach(v: V): void;
 
     /**
      * Called when this Scene is stopped.

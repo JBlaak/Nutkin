@@ -1,16 +1,15 @@
 import {SingleSceneNavigator} from '../navigators/single_scene_navigator';
 import {Scene} from '../scene';
-import {Container} from '../container';
 import {NavigatorState} from './navigator_state';
 
 export class TestSingleSceneNavigator extends SingleSceneNavigator {
     public states: NavigatorState[] = [];
 
-    constructor(private scene: Scene<Container>) {
+    constructor(private scene: Scene) {
         super();
     }
 
-    public createScene(): Scene<Container> {
+    public createScene(): Scene {
         return this.scene;
     }
 

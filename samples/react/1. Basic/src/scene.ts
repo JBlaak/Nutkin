@@ -1,26 +1,14 @@
 import {Scene} from '../../../../src/core/scene';
-import {Container} from '../../../../src/core/container';
 import {ViewProvidingScene} from '../../../../src/react/default/view_providing_scene';
-import {SquirrelComponentClass} from '../../../../src/react/squirrel_component';
 import {MyComponent} from './view';
+import {ComponentType} from 'react';
 
-export class MyScene implements Scene<MyContainer>, ViewProvidingScene<MyContainer> {
-    private count = 3;
+export class MyScene implements Scene, ViewProvidingScene<MyScene> {
+    private count = 0;
+    private countListeners: Array<(count: number) => void> = [];
 
-    public getView(): SquirrelComponentClass<MyContainer> {
+    public getView(): ComponentType<{scene: MyScene}> {
         return MyComponent;
-    }
-
-    public attach(v: MyContainer): void {
-        v.count = this.count;
-
-        v.onClick = () => {
-            v.count = ++this.count;
-        };
-    }
-
-    public detach(v: MyContainer): void {
-        /* Noop */
     }
 
     public onStart(): void {
@@ -34,9 +22,19 @@ export class MyScene implements Scene<MyContainer>, ViewProvidingScene<MyContain
     public onDestroy(): void {
         /* Noop */
     }
-}
 
-export interface MyContainer extends Container {
-    count: number;
-    onClick: () => void;
+    /**
+     * This might also be a mobx observable or a proper RxJS observable
+     * @param listener
+     */
+    public onCountUpdates(listener: (count: number) => void) {
+        this.countListeners.push(listener);
+
+        return () => (this.countListeners = this.countListeners.filter(l => l !== listener));
+    }
+
+    public onClick() {
+        this.count++;
+        this.countListeners.forEach(listener => listener(this.count));
+    }
 }

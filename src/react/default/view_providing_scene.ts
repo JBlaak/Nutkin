@@ -1,11 +1,10 @@
 import {Scene} from '../../core/scene';
-import {SquirrelComponentClass} from '../squirrel_component';
-import {Container} from '../../core/container';
+import {ComponentType} from 'react';
 
-export interface ViewProvidingScene<C> extends Scene<C> {
-    getView(): SquirrelComponentClass<C>;
+export interface ViewProvidingScene<S extends Scene> extends Scene {
+    getView(): ComponentType<{scene: S}>;
 }
 
-export function isViewProvidingScene<C extends Container>(scene: Scene<C>): scene is ViewProvidingScene<C> {
+export function isViewProvidingScene<S extends Scene>(scene: any): scene is ViewProvidingScene<S> {
     return 'getView' in scene;
 }

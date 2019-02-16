@@ -1,12 +1,11 @@
 import {Navigator} from '../navigator';
 import {Scene} from '../scene';
-import {Container} from '../container';
 
 export class TestNavigationEventsListener implements Navigator.Events {
     public isFinished = false;
-    public scenes: Array<Scene<Container>> = [];
+    public scenes: Scene[] = [];
 
-    public get lastScene(): Scene<Container> {
+    public get lastScene(): Scene {
         return this.scenes[this.scenes.length - 1] || null;
     }
 
@@ -14,7 +13,7 @@ export class TestNavigationEventsListener implements Navigator.Events {
         this.isFinished = true;
     }
 
-    public scene(scene: Scene<Container>): void {
+    public scene(scene: Scene): void {
         this.scenes.push(scene);
     }
 }

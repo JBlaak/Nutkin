@@ -1,6 +1,5 @@
 import {Navigator} from '../navigator';
 import {Scene} from '../scene';
-import {Container} from '../container';
 
 enum State {
     Inactive,
@@ -11,7 +10,7 @@ enum State {
 export abstract class CompositeStackNavigator implements Navigator.Instance, Navigator.Events {
     public abstract initialStack(): Navigator.Instance[];
 
-    private activeScene: Scene<Container> | null = null;
+    private activeScene: Scene | null = null;
 
     private _navigators: Navigator.Instance[] | undefined;
     private get navigators(): Navigator.Instance[] {
@@ -60,7 +59,7 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
         throw new Error('TODO');
     }
 
-    public scene(scene: Scene<Container>): void {
+    public scene(scene: Scene): void {
         this.activeScene = scene;
         this.listeners.forEach(listener => listener.scene(scene));
     }
