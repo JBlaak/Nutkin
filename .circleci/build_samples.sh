@@ -3,3 +3,6 @@
 yarn --cwd "./samples/react/1. Basic" install 
 yarn --cwd "./samples/react/1. Basic" start
 
+yarn --cwd "./samples/react/2. Hooks" install 
+yarn --cwd "./samples/react/2. Hooks" start
+
