@@ -1,5 +1,4 @@
 import {Scene} from '../scene';
-import {Container} from '../container';
 
 export enum SceneState {
     Started = 'Started',
@@ -7,19 +6,8 @@ export enum SceneState {
     Destroyed = 'Destroyed',
 }
 
-export interface TestContainer extends Container {}
-
-export class TestScene implements Scene<TestContainer> {
+export class TestScene implements Scene {
     public states: SceneState[] = [];
-    public attachedContainer: TestContainer | null = null;
-
-    public attach(v: TestContainer): void {
-        this.attachedContainer = v;
-    }
-
-    public detach(v: TestContainer): void {
-        this.attachedContainer = null;
-    }
 
     public onDestroy(): void {
         this.states.push(SceneState.Destroyed);
@@ -42,7 +30,7 @@ export function statesAreEqual(a: SceneState[], b: SceneState[]): boolean {
     return !a.some((item, index) => b[index] !== item);
 }
 
-export function scenesAreEqual(a: Array<Scene<Container>>, b: Array<Scene<Container>>): boolean {
+export function scenesAreEqual(a: Scene[], b: Scene[]): boolean {
     if (a.length !== b.length) {
         return false;
     }

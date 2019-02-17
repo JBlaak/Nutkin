@@ -1,5 +1,4 @@
 import {Navigator} from '../navigator';
-import {Container} from '../container';
 import {Scene} from '../scene';
 
 enum State {
@@ -9,10 +8,10 @@ enum State {
 }
 
 export abstract class StackNavigator implements Navigator.Instance {
-    public abstract initialStack(): Array<Scene<Container>>;
+    public abstract initialStack(): Scene[];
 
-    private _scenes: Array<Scene<Container>> | undefined;
-    private get scenes(): Array<Scene<Container>> {
+    private _scenes: Scene[] | undefined;
+    private get scenes(): Scene[] {
         if (this._scenes === undefined) {
             this._scenes = this.initialStack();
         }
@@ -43,7 +42,7 @@ export abstract class StackNavigator implements Navigator.Instance {
         }
     }
 
-    public push(scene: Scene<Container>) {
+    public push(scene: Scene) {
         switch (this.state) {
             case State.Inactive:
                 this.scenes.push(scene);
@@ -96,7 +95,7 @@ export abstract class StackNavigator implements Navigator.Instance {
         }
     }
 
-    public replace(scene: Scene<Container>) {
+    public replace(scene: Scene) {
         switch (this.state) {
             case State.Inactive:
                 const replacedScene1 = this.scenes.pop();
@@ -205,7 +204,7 @@ export abstract class StackNavigator implements Navigator.Instance {
         }
     }
 
-    private getLast(): Scene<Container> | undefined {
+    private getLast(): Scene | undefined {
         return this.scenes[this.scenes.length - 1];
     }
 }

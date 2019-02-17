@@ -1,5 +1,4 @@
 import {Navigator} from '../navigator';
-import {Container} from '../container';
 import {Scene} from '../scene';
 
 enum State {
@@ -9,13 +8,13 @@ enum State {
 }
 
 export abstract class SingleSceneNavigator implements Navigator.Instance {
-    public abstract createScene(): Scene<Container>;
+    public abstract createScene(): Scene;
 
     private state: State = State.Inactive;
 
     private listeners: Navigator.Events[] = [];
 
-    private _sceneInstance: Scene<Container> | undefined;
+    private _sceneInstance: Scene | undefined;
 
     private get _scene() {
         if (!this._sceneInstance) {

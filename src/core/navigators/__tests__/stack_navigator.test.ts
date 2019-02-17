@@ -1,7 +1,6 @@
 import {scenesAreEqual, SceneState, statesAreEqual, TestScene} from '../../__support__/test_scene';
 import {TestStackNavigator} from '../../__support__/test_stack_navigator';
 import {TestNavigationEventsListener} from '../../__support__/test_navigation_events_listener';
-import {Container} from '../../container';
 import {Scene} from '../../scene';
 
 type Callback = () => void;
@@ -632,7 +631,7 @@ describe('Stack navigator', () => {
         expect(statesAreEqual(scene.states, states)).toBe(true);
     }
 
-    function assertBroadcastedScenes(scenes: Array<Scene<Container>>) {
+    function assertBroadcastedScenes(scenes: Scene[]) {
         expect(scenesAreEqual(listener!.scenes, scenes)).toBe(true);
     }
 });
