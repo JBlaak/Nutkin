@@ -9,3 +9,6 @@ yarn --cwd "./samples/react/2. Hooks" start
 yarn --cwd "./samples/react/3. Stack" install 
 yarn --cwd "./samples/react/3. Stack" start
 
+yarn --cwd "./samples/react/4. Multi scene" install 
+yarn --cwd "./samples/react/4. Multi scene" start
+
