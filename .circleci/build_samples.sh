@@ -1,5 +1,8 @@
 #!/bin/sh
 
+yarn --cwd "./samples/vanilla/0. Proof" install 
+yarn --cwd "./samples/vanilla/0. Proof" start
+
 yarn --cwd "./samples/react/1. Basic" install 
 yarn --cwd "./samples/react/1. Basic" start
 
