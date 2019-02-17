@@ -1,0 +1,17 @@
+src/
+tests/
+.idea
+.circleci
+node_modules
+samples
+npm-debug.log
+yarn-error.log
+.babelrc
+.travis.yml
+karma.config.js
+mocha.config.js
+coverage/
+.prettierrc
+tsconfig.json
+tslint.json
+.rpt2_cache/

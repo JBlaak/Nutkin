@@ -1,11 +1,25 @@
 {
     "name": "squirrel",
     "version": "0.1.0",
-    "private": true,
+    "main": "dist/lib/squirrel.js",
+    "module": "dist/lib/squirrel.mjs",
+    "types": "dist/types/squirrel.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JBlaak/Squirrel.git"
+    },
+    "author": "Joris Blaak (http://label305.com)",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/JBlaak/Squirrel/issues"
+    },
+    "homepage": "https://github.com/JBlaak/Squirrel#readme",
     "scripts": {
         "precommit": "lint-staged",
         "test": "tslint & jest test --verbose --env=jsdom",
-        "test:watch": "tslint & jest test --verbose --env=jsdom --watch"
+        "test:watch": "tslint & jest test --verbose --env=jsdom --watch",
+        "prebuild": "rimraf dist",
+        "build": "tsc --module commonjs && rollup -c rollup.config.ts"
     },
     "lint-staged": {
         "*.{ts,tsx}": [
@@ -39,6 +53,11 @@
         "tslint": "^5.12.1",
         "tslint-config-prettier": "^1.17.0",
         "tslint-eslint-rules": "^5.4.0",
-        "typescript": "^3.2.4"
+        "typescript": "^3.2.4",
+        "rollup": "^1.2.0",
+        "rollup-plugin-commonjs": "^9.2.0",
+        "rollup-plugin-sourcemaps": "^0.4.2",
+        "rollup-plugin-terser": "^4.0.4",
+        "rollup-plugin-typescript2": "^0.19.2"
     }
 }
