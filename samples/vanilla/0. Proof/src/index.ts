@@ -1,5 +1,5 @@
 import {MyNavigator} from './navigator';
-import {Navigator} from '../../../../src/core/navigator';
+import {Navigator, Listener} from '../../../../src/core/navigator';
 import {Scene} from '../../../../src/core/scene';
 import {renderer} from './view';
 import {willProvideIdentity} from '../../../../src/core/scenes/provides_identity';
@@ -7,7 +7,7 @@ import {MyScene} from './scene';
 
 const myNavigator = new MyNavigator();
 
-class MyListener implements Navigator.Events {
+class MyListener implements Listener {
     constructor(private element: HTMLElement) {}
 
     public finished(): void {

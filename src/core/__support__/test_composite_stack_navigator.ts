@@ -5,11 +5,11 @@ import {NavigatorState} from './navigator_state';
 export class TestCompositeStackNavigator extends CompositeStackNavigator {
     public states: NavigatorState[] = [];
 
-    constructor(private _initialStack: Navigator.Instance[]) {
+    constructor(private _initialStack: Navigator[]) {
         super();
     }
 
-    public initialStack(): Navigator.Instance[] {
+    public initialStack(): Navigator[] {
         return this._initialStack;
     }
 
