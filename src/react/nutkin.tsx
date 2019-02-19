@@ -24,7 +24,7 @@ interface State {
     factory: ViewFactory | null;
 }
 
-export class Squirrel extends React.Component<OwnProps, State> implements Listener {
+export class Nutkin extends React.Component<OwnProps, State> implements Listener {
     public state: State = {
         lastUpdate: 0,
         scene: null,
@@ -53,7 +53,7 @@ export class Squirrel extends React.Component<OwnProps, State> implements Listen
     }
 
     /**
-     * When the Squirrel component mounts in the component tree register as listener on the navigator and
+     * When the Nutkin component mounts in the component tree register as listener on the navigator and
      * make sure it is booted
      */
     public componentDidMount(): void {
@@ -62,7 +62,7 @@ export class Squirrel extends React.Component<OwnProps, State> implements Listen
     }
 
     /**
-     * When removing the squirrel component from view make sure we stop and destroy the navigator
+     * When removing the Nutkin component from view make sure we stop and destroy the navigator
      */
     public componentWillUnmount(): void {
         this.props.navigator.onStop();

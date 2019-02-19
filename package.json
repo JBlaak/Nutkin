@@ -1,19 +1,19 @@
 {
-    "name": "squirrel",
+    "name": "nutkin",
     "version": "0.1.0",
-    "main": "dist/lib/squirrel.js",
-    "module": "dist/lib/squirrel.mjs",
-    "types": "dist/types/squirrel.d.ts",
+    "main": "dist/lib/nutkin.js",
+    "module": "dist/lib/nutkin.mjs",
+    "types": "dist/types/nutkin.d.ts",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/JBlaak/Squirrel.git"
+        "url": "git+https://github.com/JBlaak/Nutkin.git"
     },
     "author": "Joris Blaak (http://label305.com)",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/JBlaak/Squirrel/issues"
+        "url": "https://github.com/JBlaak/Nutkin/issues"
     },
-    "homepage": "https://github.com/JBlaak/Squirrel#readme",
+    "homepage": "https://github.com/JBlaak/Nutkin#readme",
     "scripts": {
         "precommit": "lint-staged",
         "test": "tslint & jest test --verbose --env=jsdom",

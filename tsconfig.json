@@ -15,5 +15,5 @@
         "typeRoots": ["node_modules/@types"],
         "jsx": "react"
     },
-    "files": ["src/squirrel.ts"]
+    "files": ["src/nutkin.ts"]
 }
