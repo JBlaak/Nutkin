@@ -1,9 +1,9 @@
-import * as React from 'react';
+import {createElement} from 'react';
 import {FunctionComponent} from 'react';
 import {Scene} from '../../core/scene';
 
 export function defaultViewFactory(scene: Scene, view: FunctionComponent<any>) {
-    return React.createElement(view, {
+    return createElement(view, {
         scene: scene,
     });
 }
