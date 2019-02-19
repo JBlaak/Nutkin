@@ -1,10 +1,10 @@
 /* Navigators */
-import * as Navigators from './core/navigators';
 export {Navigator} from './core/navigator';
-export {Navigators};
+export {CompositeStackNavigator} from './core/navigators/composite_stack_navigator';
+export {StackNavigator} from './core/navigators/stack_navigator';
+export {SingleSceneNavigator} from './core/navigators/single_scene_navigator';
 
 /* Scenes */
-
 export {Scene} from './core/scene';
 
 /* React */

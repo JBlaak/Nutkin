@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Component} from 'react';
 import {Fragment} from 'react';
 import {Scene} from '../core/scene';
 import {Navigator, Listener} from '../core/navigator';
@@ -24,7 +25,7 @@ interface State {
     factory: ViewFactory | null;
 }
 
-export class Nutkin extends React.Component<OwnProps, State> implements Listener {
+export class Nutkin extends Component<OwnProps, State> implements Listener {
     public state: State = {
         lastUpdate: 0,
         scene: null,

@@ -15,3 +15,5 @@ coverage/
 tsconfig.json
 tslint.json
 .rpt2_cache/
+jest.config.js
+rollup.config.ts
