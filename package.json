@@ -1,6 +1,6 @@
 {
     "name": "nutkin",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "main": "dist/lib/nutkin.js",
     "module": "dist/lib/nutkin.mjs",
     "types": "dist/types/nutkin.d.ts",
