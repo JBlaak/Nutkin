@@ -1,4 +1,4 @@
-import {Navigator} from '../navigator';
+import {Navigator, Listener} from '../navigator';
 import {Scene} from '../scene';
 
 enum State {
@@ -7,13 +7,13 @@ enum State {
     Destroyed,
 }
 
-export abstract class CompositeStackNavigator implements Navigator.Instance, Navigator.Events {
-    public abstract initialStack(): Navigator.Instance[];
+export abstract class CompositeStackNavigator implements Navigator, Listener {
+    public abstract initialStack(): Navigator[];
 
     private activeScene: Scene | null = null;
 
-    private _navigators: Navigator.Instance[] | undefined;
-    private get navigators(): Navigator.Instance[] {
+    private _navigators: Navigator[] | undefined;
+    private get navigators(): Navigator[] {
         if (this._navigators === undefined) {
             this._navigators = this.initialStack();
             this._navigators.forEach(navigator => this.addListenerTo(navigator));
@@ -23,9 +23,9 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
 
     private state = State.Inactive;
 
-    private listeners: Navigator.Events[] = [];
+    private listeners: Listener[] = [];
 
-    public addNavigatorEventsListener(listener: Navigator.Events): () => void {
+    public addNavigatorEventsListener(listener: Listener): () => void {
         this.listeners.push(listener);
 
         switch (this.state) {
@@ -48,7 +48,7 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
         };
     }
 
-    private addListenerTo(navigator: Navigator.Instance) {
+    private addListenerTo(navigator: Navigator) {
         // Child navigators have a shorter lifetime than their parent navigators,
         // so it is not necessary to unregister the listener.
         // noinspection CheckResult
@@ -88,7 +88,7 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
         return this.state === State.Destroyed;
     }
 
-    public replace(navigator: Navigator.Instance) {
+    public replace(navigator: Navigator) {
         this.addListenerTo(navigator);
 
         switch (this.state) {
@@ -114,7 +114,7 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
         }
     }
 
-    public push(navigator: Navigator.Instance) {
+    public push(navigator: Navigator) {
         this.addListenerTo(navigator);
         switch (this.state) {
             case State.Inactive:
@@ -224,7 +224,7 @@ export abstract class CompositeStackNavigator implements Navigator.Instance, Nav
         }
     }
 
-    private getLast(): Navigator.Instance | undefined {
+    private getLast(): Navigator | undefined {
         return this.navigators[this.navigators.length - 1];
     }
 }

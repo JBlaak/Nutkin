@@ -1,7 +1,7 @@
-import {Navigator} from '../navigator';
+import {Navigator, Listener} from '../navigator';
 import {Scene} from '../scene';
 
-export class TestNavigationEventsListener implements Navigator.Events {
+export class TestNavigationEventsListener implements Listener {
     public isFinished = false;
     public scenes: Scene[] = [];
 

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import {Fragment} from 'react';
 import {Scene} from '../core/scene';
-import {Navigator} from '../core/navigator';
+import {Navigator, Listener} from '../core/navigator';
 import {getViewFactoryForScene, ViewFactory} from './view_factory_factory';
 
 interface OwnProps {
-    navigator: Navigator.Instance;
+    navigator: Navigator;
     onFinish?: () => void;
 }
 
@@ -24,7 +24,7 @@ interface State {
     factory: ViewFactory | null;
 }
 
-export class Squirrel extends React.Component<OwnProps, State> implements Navigator.Events {
+export class Squirrel extends React.Component<OwnProps, State> implements Listener {
     public state: State = {
         lastUpdate: 0,
         scene: null,

@@ -1,4 +1,4 @@
-import {Navigator} from '../navigator';
+import {Navigator, Listener} from '../navigator';
 import {Scene} from '../scene';
 
 enum State {
@@ -7,12 +7,12 @@ enum State {
     Destroyed,
 }
 
-export abstract class SingleSceneNavigator implements Navigator.Instance {
+export abstract class SingleSceneNavigator implements Navigator {
     public abstract createScene(): Scene;
 
     private state: State = State.Inactive;
 
-    private listeners: Navigator.Events[] = [];
+    private listeners: Listener[] = [];
 
     private _sceneInstance: Scene | undefined;
 
@@ -40,7 +40,7 @@ export abstract class SingleSceneNavigator implements Navigator.Instance {
         }
     }
 
-    public addNavigatorEventsListener(listener: Navigator.Events): () => void {
+    public addNavigatorEventsListener(listener: Listener): () => void {
         this.listeners.push(listener);
         return () => {
             this.listeners = this.listeners.filter(l => l !== listener);
