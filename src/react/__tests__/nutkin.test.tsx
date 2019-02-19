@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {render} from 'react-testing-library';
 import 'react-testing-library/cleanup-after-each';
 import 'jest-dom/extend-expect';
-import {Squirrel} from '../squirrel';
+import {Nutkin} from '../nutkin';
 import {navigatorStatesAreEqual, TestSingleSceneNavigator} from '../../core/__support__/test_single_scene_navigator';
 import {TestViewProvidingScene} from '../__support__/test_view_providing_scene';
 import {SceneState, statesAreEqual} from '../../core/__support__/test_scene';
@@ -12,7 +12,7 @@ import {OtherTestComponent} from '../__support__/other_test_component';
 import {TestComponent} from '../__support__/test_component';
 import {NavigatorState} from '../../core/__support__/navigator_state';
 
-describe('React Squirrel', () => {
+describe('React Nutkin', () => {
     describe('Single render lifecycle with view providing scenes', () => {
         it('should render component', () => {
             /* Given */
@@ -20,7 +20,7 @@ describe('React Squirrel', () => {
             const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
 
             /* When */
-            const result = render(<Squirrel navigator={testSingleSceneNavigator} />);
+            const result = render(<Nutkin navigator={testSingleSceneNavigator} />);
 
             /* Then */
             expect(result.getByText('Hi')).toBeInTheDocument();
@@ -32,13 +32,13 @@ describe('React Squirrel', () => {
             const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
 
             /* When */
-            render(<Squirrel navigator={testSingleSceneNavigator} />);
+            render(<Nutkin navigator={testSingleSceneNavigator} />);
 
             /* Then */
             expect(statesAreEqual(testScene.states, [SceneState.Started])).toBe(true);
         });
 
-        it('finishing of the navigator should trigger onFinish callback on Squirrel component', () => {
+        it('finishing of the navigator should trigger onFinish callback on Nutkin component', () => {
             /* Given */
             const testScene = new TestViewProvidingScene();
             const testSingleSceneNavigator = new TestSingleSceneNavigator(testScene);
@@ -46,7 +46,7 @@ describe('React Squirrel', () => {
             /* When */
             let finished = false;
             const onFinish = () => (finished = true);
-            render(<Squirrel navigator={testSingleSceneNavigator} onFinish={onFinish} />);
+            render(<Nutkin navigator={testSingleSceneNavigator} onFinish={onFinish} />);
             testSingleSceneNavigator.finish();
 
             /* Then */
@@ -61,7 +61,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            const result = render(<Squirrel navigator={testStackNavigator} />);
+            const result = render(<Nutkin navigator={testStackNavigator} />);
 
             /* Then */
             expect(result.getByText('Hi')).toBeInTheDocument();
@@ -73,7 +73,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            render(<Squirrel navigator={testStackNavigator} />);
+            render(<Nutkin navigator={testStackNavigator} />);
 
             /* Then */
             expect(statesAreEqual(testScene1.states, [SceneState.Started])).toBe(true);
@@ -86,7 +86,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            const result = render(<Squirrel navigator={testStackNavigator} />);
+            const result = render(<Nutkin navigator={testStackNavigator} />);
             testStackNavigator.push(testScene2);
 
             /* Then */
@@ -100,7 +100,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            render(<Squirrel navigator={testStackNavigator} />);
+            render(<Nutkin navigator={testStackNavigator} />);
             testStackNavigator.push(testScene2);
 
             /* Then */
@@ -116,7 +116,7 @@ describe('React Squirrel', () => {
 
             /* When */
             testStackNavigator.push(testScene2);
-            const result = render(<Squirrel navigator={testStackNavigator} />);
+            const result = render(<Nutkin navigator={testStackNavigator} />);
 
             /* Then */
             expect(result.getByText('Ho')).toBeInTheDocument();
@@ -129,7 +129,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            const result = render(<Squirrel navigator={testStackNavigator} />);
+            const result = render(<Nutkin navigator={testStackNavigator} />);
             testStackNavigator.push(testScene2);
             testStackNavigator.pop();
 
@@ -144,7 +144,7 @@ describe('React Squirrel', () => {
             const testStackNavigator = new TestStackNavigator([testScene1]);
 
             /* When */
-            render(<Squirrel navigator={testStackNavigator} />);
+            render(<Nutkin navigator={testStackNavigator} />);
             testStackNavigator.push(testScene2);
             testStackNavigator.pop();
 
@@ -158,7 +158,7 @@ describe('React Squirrel', () => {
         });
     });
 
-    describe('<Squirrel/> lifecycle', () => {
+    describe('<Nutkin/> lifecycle', () => {
         it('should not crash when removed from component tree', () => {
             /* Given */
             const testScene = new TestViewProvidingScene();
@@ -172,7 +172,7 @@ describe('React Squirrel', () => {
                 );
                 setIsVisible = _setIsVisible;
 
-                return isVisible ? <Squirrel navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
+                return isVisible ? <Nutkin navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
             };
             const result = render(<MyComponent />);
             setIsVisible!(false);
@@ -193,7 +193,7 @@ describe('React Squirrel', () => {
                 );
                 setIsVisible = _setIsVisible;
 
-                return isVisible ? <Squirrel navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
+                return isVisible ? <Nutkin navigator={testSingleSceneNavigator} /> : <div>Nope</div>;
             };
             const result = render(<MyComponent />);
             setIsVisible!(false);

@@ -6,7 +6,7 @@ import typescript from 'rollup-plugin-typescript2';
 const pkg = require('./package.json');
 
 const sharedConfig = {
-    input: `src/squirrel.ts`,
+    input: `src/nutkin.ts`,
     watch: {
         include: 'src/**',
     },
@@ -23,8 +23,8 @@ const sharedConfig = {
 };
 
 const outputs = [
-    {file: pkg.main, name: 'squirrel', format: 'umd', sourcemap: true},
-    {file: pkg.module, name: 'squirrel', format: 'es', sourcemap: true},
+    {file: pkg.main, name: 'nutkin', format: 'umd', sourcemap: true},
+    {file: pkg.module, name: 'nutkin', format: 'es', sourcemap: true},
 ];
 
 export default outputs.map(output => ({...sharedConfig, output}));

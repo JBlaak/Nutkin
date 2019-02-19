@@ -8,4 +8,4 @@ export {Navigators};
 export {Scene} from './core/scene';
 
 /* React */
-export {Squirrel} from './react/squirrel';
+export {Nutkin} from './react/nutkin';
