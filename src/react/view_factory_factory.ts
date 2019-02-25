@@ -1,5 +1,5 @@
 import {isViewProvidingScene} from './default/view_providing_scene';
-import {Scene} from '../core/scene';
+import {Scene} from '../nutkin';
 import {defaultViewFactory} from './default/default_view_factory';
 
 export interface ViewFactory {

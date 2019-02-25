@@ -12,13 +12,13 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
 
     private activeScene: Scene | null = null;
 
-    private _navigators: Navigator[] | undefined;
-    private get navigators(): Navigator[] {
-        if (this._navigators === undefined) {
-            this._navigators = this.initialStack();
-            this._navigators.forEach(navigator => this.addListenerTo(navigator));
+    private _stack: Navigator[] | undefined;
+    protected get stack(): Navigator[] {
+        if (this._stack === undefined) {
+            this._stack = this.initialStack();
+            this._stack.forEach(navigator => this.addListenerTo(navigator));
         }
-        return this._navigators;
+        return this._stack;
     }
 
     private state = State.Inactive;
@@ -68,7 +68,7 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
         switch (this.state) {
             case State.Inactive:
                 this.listeners.forEach(listener => listener.finished());
-                this.navigators.reverse().forEach(listener => listener.onDestroy());
+                this.stack.reverse().forEach(listener => listener.onDestroy());
                 break;
             case State.Active:
                 this.listeners.forEach(listener => listener.finished());
@@ -93,15 +93,15 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
 
         switch (this.state) {
             case State.Inactive:
-                const replacedNavigator1 = this.navigators.pop();
-                this.navigators.push(navigator);
+                const replacedNavigator1 = this.stack.pop();
+                this.stack.push(navigator);
                 if (replacedNavigator1) {
                     replacedNavigator1.onDestroy();
                 }
                 break;
             case State.Active:
-                const replacedNavigator2 = this.navigators.pop();
-                this.navigators.push(navigator);
+                const replacedNavigator2 = this.stack.pop();
+                this.stack.push(navigator);
                 if (replacedNavigator2) {
                     replacedNavigator2.onStop();
                     replacedNavigator2.onDestroy();
@@ -118,14 +118,14 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
         this.addListenerTo(navigator);
         switch (this.state) {
             case State.Inactive:
-                this.navigators.push(navigator);
+                this.stack.push(navigator);
                 break;
             case State.Active:
                 const last = this.getLast();
                 if (last) {
                     last.onStop();
                 }
-                this.navigators.push(navigator);
+                this.stack.push(navigator);
                 navigator.onStart();
                 break;
             case State.Destroyed:
@@ -137,7 +137,7 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
     public pop() {
         switch (this.state) {
             case State.Inactive:
-                const poppedNavigator1 = this.navigators.pop();
+                const poppedNavigator1 = this.stack.pop();
                 if (poppedNavigator1) {
                     poppedNavigator1.onDestroy();
                 }
@@ -151,7 +151,7 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
                 }
                 break;
             case State.Active:
-                const poppedNavigator2 = this.navigators.pop();
+                const poppedNavigator2 = this.stack.pop();
                 if (poppedNavigator2) {
                     poppedNavigator2.onStop();
                     poppedNavigator2.onDestroy();
@@ -210,12 +210,12 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
     public onDestroy(): void {
         switch (this.state) {
             case State.Inactive:
-                this.navigators.reverse().forEach(navigator => navigator.onDestroy());
+                this.stack.reverse().forEach(navigator => navigator.onDestroy());
                 this.state = State.Destroyed;
                 break;
             case State.Active:
                 this.onStop();
-                this.navigators.reverse().forEach(navigator => navigator.onDestroy());
+                this.stack.reverse().forEach(navigator => navigator.onDestroy());
                 this.state = State.Destroyed;
                 break;
             case State.Destroyed:
@@ -225,6 +225,6 @@ export abstract class CompositeStackNavigator implements Navigator, Listener {
     }
 
     private getLast(): Navigator | undefined {
-        return this.navigators[this.navigators.length - 1];
+        return this.stack[this.stack.length - 1];
     }
 }

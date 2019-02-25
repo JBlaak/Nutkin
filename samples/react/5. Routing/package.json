@@ -1,0 +1,24 @@
+{
+    "scripts": {
+        "start": "webpack --display minimal",
+        "test": "jest test --verbose --env=jsdom"
+    },
+    "dependencies": {
+        "@types/jest": "^23.3.13",
+        "@types/react": "^16.7.21",
+        "@types/react-dom": "^16.0.11",
+        "@types/universal-router": "^8.0.0",
+        "react": "^16.7.0",
+        "react-dom": "^16.7.0",
+        "universal-router": "^8.1.0"
+    },
+    "devDependencies": {
+        "jest": "^24.0.0",
+        "jest-dom": "^3.0.1",
+        "ts-jest": "^23.10.5",
+        "ts-loader": "^5.3.3",
+        "typescript": "^3.2.4",
+        "webpack": "^4.29.0",
+        "webpack-cli": "^3.2.1"
+    }
+}

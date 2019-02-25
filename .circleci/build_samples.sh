@@ -15,6 +15,9 @@ yarn --cwd "./samples/react/3. Stack" start
 yarn --cwd "./samples/react/4. Multi scene" install 
 yarn --cwd "./samples/react/4. Multi scene" start
 
+yarn --cwd "./samples/react/5. Routing" install 
+yarn --cwd "./samples/react/5. Routing" start 
+
 yarn --cwd "./samples/react/TodoMVC" install 
 yarn --cwd "./samples/react/TodoMVC" start 
 yarn --cwd "./samples/react/TodoMVC" test 

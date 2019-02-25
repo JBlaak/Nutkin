@@ -1,8 +1,6 @@
 import * as React from 'react';
-import {Component} from 'react';
-import {Fragment} from 'react';
-import {Scene} from '../core/scene';
-import {Navigator, Listener} from '../core/navigator';
+import {Component, Fragment} from 'react';
+import {Listener, Navigator, Scene} from '../nutkin';
 import {getViewFactoryForScene, ViewFactory} from './view_factory_factory';
 
 interface OwnProps {
