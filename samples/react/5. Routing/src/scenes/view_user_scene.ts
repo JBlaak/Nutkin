@@ -22,7 +22,7 @@ export class ViewUserScene implements Scene, ViewProvidingScene<ViewUserScene> {
         /* Noop */
     }
 
-    public onClickBack() {
+    public onBackClick() {
         this.listener.back();
     }
 }
