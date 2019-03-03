@@ -40,6 +40,10 @@ export class AppNavigator extends HistoryCompositeStackNavigator implements Home
         this.history.goBack();
     }
 
+    public onContactClick(): void {
+        this.history.push('/contact');
+    }
+
     public onUserClick(userId: number): void {
         this.history.push('/user/' + userId);
     }

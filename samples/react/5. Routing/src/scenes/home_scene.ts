@@ -25,8 +25,13 @@ export class HomeScene implements Scene, ViewProvidingScene<HomeScene> {
     public onUserClick(userId: number) {
         this.listener.onUserClick(userId);
     }
+
+    public onContactClick() {
+        this.listener.onContactClick();
+    }
 }
 
 export interface HomeEvents {
     onUserClick(userId: number): void;
+    onContactClick(): void;
 }
